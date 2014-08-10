@@ -27,7 +27,7 @@ var todoApp = angular.module('todoApp', ['ngAnimate'])
 	};
 
 	$scope.clearCompleted = function(){
-		for(var i = 0; i < $scope.todos.length; i++){
+		for(var i = $scope.todos.length - 1; i >= 0; i--){
 			if($scope.todos[i].status === 'complete'){
 				$scope.todos.splice(i, 1);
 			}
