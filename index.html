@@ -1,0 +1,68 @@
+<html>
+<head>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular-animate.js"></script>
+	<script src="todo.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+
+	<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel='stylesheet'>
+	<link href="https://raw.githubusercontent.com/daneden/animate.css/master/animate.css" rel='stylesheet'>
+	<link href="style.css" rel='stylesheet'>
+
+	<title>Mike's ToDo App</title>
+</head>
+<body ng-app='todoApp' ng-controller='todoCtrl'>
+
+	<div class='container'>
+
+		<div class='col-md-6'>
+		<ul class="nav nav-tabs" role="tablist">
+	  		<li class='tab' id='all' ng-click="makeActive('all')"><a href>All</a></li>
+	  		<li class='tab active' id='active' ng-click="makeActive('active')"><a href>Active</a></li>
+	  		<li class='tab' id='complete' ng-click="makeActive('complete')"><a href>Completed</a></li>
+	  		<li class='alert alert-danger messagebox' ng-show='message'>{{message}}</li>
+		</ul>
+
+		<form ng-submit='addTodo(description)'>
+			<div class='input-group'>
+				<input type='text' class='form-control' ng-model='description'></input>
+				<span class='input-group-btn'><button class='btn btn-primary' type'submit'>Submit New Todo</button></span>
+			</div>
+		</form>
+
+		<ul class='list-group'>
+			<li class='list-group-item' ng-repeat='todo in todos | filter: isActiveOrComplete' id="{{$index}}" ng-mouseover='todoHover($index)' ng-mouseleave='todoHoverOff($index)'>
+				<div class='row'>
+					<div class='col-md-1'>
+						<span class="glyphicon glyphicon-ok" ng-show="todo.status === 'complete'"></span>
+					</div>
+					<div class='col-md-7'>
+						{{todo.description}}
+					</div>
+					<div class='col-md-1'>
+						<a href ng-click="setStatus('complete')" ng-show="showButtons && todo.status !== 'complete'"><span class="glyphicon glyphicon-ok-circle"></span></a>
+					</div>
+					<div class='col-md-1'>
+						<a href ng-click='deleteTodo(todo)' ng-show='showButtons'><span class="glyphicon glyphicon-remove-circle"></span></a>
+					</div>
+					<div class='col-md-1'>
+						<a href ng-click='moveUp(todo)' ng-show='showButtons && $index !== 0'><span class="glyphicon glyphicon-chevron-up"></span></a>
+					</div>
+					<div class='col-md-1'>
+						<a href ng-click='moveDown(todo)' ng-show='showButtons && !lastTodoInList(todo)'><span class="glyphicon glyphicon-chevron-down"></span></a>
+					</div>
+
+				</div>
+			</li>
+		</ul>
+
+		<a href ng-click='clearCompleted'><button class='btn btn-primary' ng-show="sortSelect === 'complete'">Clear Completed Todos</button></a>
+	</div>
+	</div>
+
+</body>
+</html>
+
+
