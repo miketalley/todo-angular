@@ -32,8 +32,15 @@
 			</div>
 		</form>
 
-		<ul class='list-group'>
-			<li class='list-group-item' ng-repeat='todo in todos | filter: isActiveOrComplete' id="{{$index}}" ng-mouseover='todoHover($index)' ng-mouseleave='todoHoverOff($index)'>
+		<ul class='list-group dropzone'>
+			<li class='list-group-item'
+				ng-repeat='todo in todos | filter: filterBySelection'
+				id="{{todo.id}}"
+				ng-mouseover='todoHover(todo.id)'
+				ng-mouseleave='todoHoverOff(todo.id)'
+				draggable
+				droppable
+			>
 				<div class='row'>
 					<div class='col-md-1'>
 						<span class="glyphicon glyphicon-ok" ng-show="todo.status === 'complete'"></span>
@@ -58,7 +65,7 @@
 			</li>
 		</ul>
 
-		<a href ng-click='clearCompleted()'><button class='btn btn-primary' ng-show="sortSelect === 'complete'">Clear Completed Todos</button></a>
+		<a href ng-click='clearCompleted()'><button class='btn btn-primary' ng-show="sortSelect === 'complete' || sortSelect === 'all'">Clear Completed Todos</button></a>
 	</div>
 	</div>
 
