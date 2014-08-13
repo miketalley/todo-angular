@@ -18,12 +18,14 @@
 	<div class='container'>
 
 		<div class='col-md-6'>
+		<div class='messagebox' ng-show='message'>{{message}}</div>
 		<ul class="nav nav-tabs" role="tablist">
-	  		<li class='tab' id='all' ng-click="makeActive('all')"><a href>All</a></li>
-	  		<li class='tab active' id='active' ng-click="makeActive('active')"><a href>Active</a></li>
-	  		<li class='tab' id='complete' ng-click="makeActive('complete')"><a href>Completed</a></li>
-	  		<li class='alert alert-danger messagebox' ng-show='message'>{{message}}</li>
+	  	<li class='tab' id='all' ng-click="makeActive('all')"><a href>All</a></li>
+	  	<li class='tab active' id='active' ng-click="makeActive('active')"><a href>Active</a></li>
+	  	<li class='tab' id='complete' ng-click="makeActive('complete')"><a href>Completed</a></li>
+
 		</ul>
+
 
 		<form ng-submit='addTodo(description)'>
 			<div class='input-group'>
@@ -33,7 +35,7 @@
 		</form>
 
 		<ul class='list-group dropzone'>
-			<li class='list-group-item active small text-center' id="0" droppable>Todos</li>
+			<li class='list-group-item active' id="0" droppable ng-show='todos.length'></li>
 			<li class='list-group-item'
 				ng-repeat='todo in todos | filter: filterBySelection'
 				id="{{todo.id}}"
@@ -66,7 +68,9 @@
 			</li>
 		</ul>
 
-		<a href ng-click='clearCompleted()'><button class='btn btn-primary' ng-show="sortSelect === 'complete' || sortSelect === 'all'">Clear Completed Todos</button></a>
+		<div class='clear-button pull-right'>
+			<a href ng-click='clearCompleted()'><button class='btn btn-primary' ng-show="sortSelect === 'complete' || sortSelect === 'all'">Clear Completed Todos</button></a>
+		</div>
 	</div>
 	</div>
 

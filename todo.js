@@ -177,12 +177,13 @@ var todoApp = angular.module('todoApp', ['ngAnimate'])
 	};
 
 	$scope.handleDragEnter = function(e){
+		$('.list-group-item').removeClass('over');
 		this.classList.add('over');
 		return false;
 	};
 
 	$scope.handleDragLeave = function(e){
-		this.classList.remove('over');
+		// this.classList.remove('over');
 		return false;
 	};
 
@@ -196,9 +197,11 @@ var todoApp = angular.module('todoApp', ['ngAnimate'])
 
 		$scope.todoHoverOff(droppedItem);
 
-		$scope.$apply(function(){
-			$scope.moveTodo(droppedItem, droppedOn);
-		});
+		if(droppedItem !== droppedOn){
+			$scope.$apply(function(){
+				$scope.moveTodo(droppedItem, droppedOn);
+			});
+		}
 
 		return false;
 	};
