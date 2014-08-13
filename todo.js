@@ -3,7 +3,7 @@ var todoApp = angular.module('todoApp', ['ngAnimate'])
 .controller('todoCtrl', ['$scope', function($scope){
 	$scope.sortSelect = 'active';
 	$scope.todos = [];
-	$scope.idCount = 0;
+	$scope.idCount = 1;
 
 	$scope.addTodo = function(description){
 		var todoExists = false;
