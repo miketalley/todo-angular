@@ -42,3 +42,15 @@
 .messagebox.ng-enter-active {
   opacity: 0;
 }
+
+.over {
+  position: relative;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  border: 1px solid black;
+  box-shadow: 5px 5px 10px #000000;
+}
+
+.drag {
+  opacity: 0.6;
+}
